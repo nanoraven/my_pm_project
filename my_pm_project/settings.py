@@ -24,7 +24,7 @@ SECRET_KEY = 'st0*e00aag=bg!8&$=^&w+uotts^f87-9$nzk%!5%nz25%eev4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['restapinanoraven.herokuapp.com']
 
 # Application definition
 
