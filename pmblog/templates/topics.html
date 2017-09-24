@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+PMBLOG - {{post.title}}
+{% endblock %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Posts</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'post_topics' post.pk %}">{{post.title}}</a></li>
+</ol>
+{% endblock %}
+
+{% block post %}
+<div class="blog-post">
+    <h2 class="blog-post-title">{{post.title}}</h2>
+    <p class="blog-post-meta">{{post.createad_in}} by <a href="#">{{post.createad_by}}</a></p>
+
+    {{post.text|safe}}
+
+</div><!-- /.blog-post -->
+{% endblock %}
+
