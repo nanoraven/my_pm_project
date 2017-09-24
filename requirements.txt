@@ -8,3 +8,4 @@ django-ckeditor==5.3.0
 image==1.5.15
 olefile==0.44
 gunicorn==19.6.0
+whitenoise==3.3.1
