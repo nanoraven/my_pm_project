@@ -6,27 +6,15 @@
 {% endblock %}
 
 {% block post %}
-<div class="container">
+    {% for post in posts %}
+    <div class="blog-post">
+        <h2 class="blog-post-title">{{post.title}}</h2>
+        <p class="blog-post-meta">{{post.createad_in}} by <a href="#">{{post.createad_by}}</a></p>
+        {{ post.text|truncatechars:300|safe }} <br>
+        <br>
+        <a class="btn btn-primary" href="{% url 'post_topics' post.pk %}" role="button">Читать подробнее...</a>
 
-    <table class="table">
-        <thead class="thead-inverse">
-        <tr>
-            <th>Posts</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-        <tr>
-            <td>
-                <a href="{% url 'post_topics' post.pk %}">{{ post.title }}</a>
-                <!--<small class="text-muted d-block">{{ board.description }}</small>-->
-            </td>
-            <!--<td class="align-middle">0</td>-->
-            <!--<td class="align-middle">0</td>-->
-            <!--<td></td>-->
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+    </div><!-- /.blog-post -->
+    <hr>
+    {% endfor %}
 {% endblock %}

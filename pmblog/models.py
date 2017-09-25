@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-from ckeditor import widgets
 
 # Create your models here.
 
@@ -18,5 +17,4 @@ class Comment(models.Model):
     author = models.CharField(max_length=50)
     text = models.TextField(max_length=300)
     created_in = models.DateTimeField(auto_now_add=True)
-
 
