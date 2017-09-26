@@ -24,7 +24,7 @@ SECRET_KEY = 'st0*e00aag=bg!8&$=^&w+uotts^f87-9$nzk%!5%nz25%eev4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['restapinanoraven.herokuapp.com']
+ALLOWED_HOSTS = ['restapinanoraven.herokuapp.com','127.0.0.1']
 
 # Application definition
 
@@ -77,8 +77,14 @@ WSGI_APPLICATION = 'my_pm_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'ec2-79-125-118-221.eu-west-1.compute.amazonaws.com',  # Set to empty string for localhost.
+        'NAME': 'd1jlab6518clm4',
+        'USER': 'wojvpnncuqumhs',
+        'PASSWORD': '980c127b30358986d664b39025d99090f31c8ce6f88c35961dad41e562074a71',
+        'PORT': '5432',  # Set to empty string for default.
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -149,5 +155,7 @@ CKEDITOR_CONFIGS = {
         [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ],
         [ 'Maximize', 'ShowBlocks' ]
     ],
+        'width': '100%',
+        'height': 1000,
     }
 }
