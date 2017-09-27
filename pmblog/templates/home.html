@@ -10,7 +10,7 @@
 <div class="blog-post">
     <h2 class="blog-post-title">{{post.title}}</h2>
     <p class="blog-post-meta">{{post.createad_in}} by <a href="#">{{post.createad_by}}</a></p>
-    {{ post.text|truncatechars:300|safe }} <br>
+    {{ post.text|truncatechars_html:300|safe }} <br>
     <br>
     <a class="btn btn-primary" href="{% url 'post_topics' post.pk %}" role="button">Читать подробнее...</a>
 
