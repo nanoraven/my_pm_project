@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
+
+{% block tablecontent %}
+<div class="blog-masthead">
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                   aria-haspopup="true"
+                   aria-expanded="false">Содержание</a>
+                <div class="dropdown-menu">
+
+
+                    {% for post in all_articles %}
+                    <a class="dropdown-item" href="{% url 'post_topics' post.pk %}">{{post.title|truncatechars:20}}</a>
+                    {% endfor %}
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
 {% block breadcrumb %}
 <ol class="breadcrumb my-4">
-    <li class="breadcrumb-item active">Boards</li>
+    <li class="breadcrumb-item active">Board1s</li>
 </ol>
 {% endblock %}
+
 
 {% block post %}
 {% for post in posts %}
