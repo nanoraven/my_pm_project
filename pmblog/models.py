@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -10,6 +11,11 @@ class Post(models.Model):
     text = RichTextUploadingField(blank=True, default='')
     createad_in = models.DateTimeField(auto_now_add=True)
     createad_by = models.ForeignKey(User,related_name='users')
+    is_published = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.title
+
 
 class Comment(models.Model):
 

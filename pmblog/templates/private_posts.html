@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block tablecontent %}
+<div class="blog-masthead">
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                   aria-haspopup="true"
+                   aria-expanded="false">Содержание</a>
+                <div class="dropdown-menu">
+
+
+                    {% for post in object_list %}
+                    <a class="dropdown-item" href="{% url 'post_topics' post.pk %}">{{post.title|truncatechars:20}}</a>
+                    {% endfor %}
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active">Posts</li>
+</ol>
+{% endblock %}
+
+
+{% block post %}
+{% for post in object_list %}
+
+{% if not post.is_published %}
+<div class="alert alert-danger" role="alert">
+  Пост не был опубликован. Отредактируйте и опубликуйте в ближайшее время!
+</div>
+{% endif %}
+
+
+<div class="blog-post">
+    <h2 class="blog-post-title">{{post.title}}</h2>
+    <p class="blog-post-meta">{{post.createad_in}} by <a href="#">{{post.createad_by}}</a></p>
+    {{ post.text|truncatechars_html:300|safe }} <br>
+    <br>
+    <a class="btn btn-primary" href="{% url 'post_topics' post.pk %}" role="button">Читать подробнее...</a>
+
+</div><!-- /.blog-post -->
+<hr>
+{% endfor %}
+{% endblock %}
+
+{% block pagination %}
+
+<nav aria-label="...">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="/posts_private/page/{{ page_obj.previous_page_number }}/">Previous</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        {% endif %}
+
+        {% for page in paginator.page_range %}
+            {% if page != posts.number %}
+                <li class="page-item"><a class="page-link" href="/posts_private/page/{{ page }}">{{ page }}</a></li>
+            {% else %}
+                <li class="page-item active">
+                <span class="page-link">
+                {{ page }}
+                <span class="sr-only">(current)</span>
+                </span>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="/posts_private/page/{{ page_obj.next_page_number }}">Next</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Next</span>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endblock %}
