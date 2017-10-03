@@ -14,7 +14,7 @@
                 <div class="dropdown-menu">
 
 
-                    {% for post in object_list %}
+                    {% for post in posts %}
                     <a class="dropdown-item" href="{% url 'post_topics' post.pk %}">{{post.title|truncatechars:20}}</a>
                     {% endfor %}
                 </div>

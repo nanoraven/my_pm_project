@@ -32,7 +32,7 @@ class HomePageView(TemplateView):
             posts = paginator.page(paginator.num_pages)
         context = self.get_context_data()
         context['all_articles'] = Post.objects.filter(is_published=True).order_by('createad_in')
-        context['posts'] = posts
+        context['posts'] = posts_list
         return self.render_to_response(context)
 
 class PrivatePostList(ListView,MultipleObjectMixin):
