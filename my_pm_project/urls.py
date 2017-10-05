@@ -18,12 +18,13 @@ from django.contrib import admin
 from pmblog import views
 from django.conf.urls.static import static
 from my_pm_project import settings
-from pmblog.views import HomePageView, PrivatePostList
+from pmblog.views import HomePageView, PrivatePostList, PostTopicDetailView
 
 urlpatterns = [
     # url(r'^$', views.home, name='home'),
     url(r'^$', HomePageView.as_view(), name='home'),
-    url(r'^posts/(?P<pk>\d+)/$', views.post_topics, name='post_topics'),
+    # url(r'^posts/(?P<pk>\d+)/$', views.post_topics, name='post_topics'),
+    url(r'^posts/(?P<pk>\d+)/$', PostTopicDetailView.as_view(), name='post_topics'),
     url(r'^posts_private/$', PrivatePostList.as_view(), name='private_posts'),
     url(r'^admin/', admin.site.urls),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),

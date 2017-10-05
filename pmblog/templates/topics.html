@@ -46,6 +46,22 @@ PMBLOG - {{post.title}}
 {% endblock %}
 
 {% block pagination %}
+  <div class="row justify-content-md-center">
+    <div class="col">
+        {% if post_prev != -1 %}
+            <p class="text-left"><a href="{% url 'post_topics' post_prev.pk %}">&larr; {{post_prev.title|truncatechars:25}}</a></p>
+        {% endif %}
+    </div>
+    <div class="col-5">
+      <p class="text-center"><a href="{% url 'home' %}">Содержание</a></p>
+    </div>
+    <div class="col">
+        {% if post_next != -1 %}
+            <p class="text-right"><a href="{% url 'post_topics' post_next.pk %}">{{post_next.title|truncatechars:25}} &rarr;</a></p>
+        {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 

@@ -13,9 +13,6 @@ class Post(models.Model):
     createad_by = models.ForeignKey(User,related_name='users')
     is_published = models.BooleanField(default=False)
 
-    def __unicode__(self):
-        return self.title
-
 
 class Comment(models.Model):
 

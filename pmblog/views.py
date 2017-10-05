@@ -3,14 +3,55 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 
 from .models import Post
 
-def post_topics(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'topics.html', {'post': post})
+import logging
+logger = logging.getLogger(__name__)
+
+class PostTopicDetailView(DetailView, SingleObjectMixin):
+    template_name = "topics.html"
+    queryset = Post.objects.filter(is_published=True)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Post.objects.all())
+        return super(PostTopicDetailView,self).get(request,*args,**kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(PostTopicDetailView,self).get_context_data(**kwargs)
+        pk=int(self.kwargs['pk'])
+        # try:
+        post_prev = Post.objects.filter(pk=str(pk-1))
+        # except BaseException:
+        #     post_prev = -1
+        # try:
+        post_next = Post.objects.filter(pk=str(pk+1))
+        # except BaseException:
+        #     post_next = -1
+
+        context["post"] = self.object
+        if (not post_next) or post_next==1:
+            context["post_next"] = -1
+        else:
+            if post_next[0].is_published:
+                context["post_next"] = post_next[0]
+            else:
+                context["post_next"] = -1
+
+        if (not post_prev) or post_prev== -1:
+            context["post_prev"] = -1
+        else:
+            if post_prev[0].is_published:
+                context["post_prev"] = post_prev[0]
+            else:
+                context["post_prev"] = -1
+        logger.error("pk = {}".format(pk))
+        logger.error("Post prev = {}".format(post_prev))
+        logger.error("Post next = {}".format(post_next))
+        return context
 
 class HomePageView(TemplateView):
     template_name = "home.html"
