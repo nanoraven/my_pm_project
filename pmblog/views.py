@@ -17,20 +17,15 @@ class PostTopicDetailView(DetailView, SingleObjectMixin):
     queryset = Post.objects.filter(is_published=True)
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=Post.objects.all())
+        self.object = self.get_object(queryset=Post.objects.filter(is_published=True))
         return super(PostTopicDetailView,self).get(request,*args,**kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(PostTopicDetailView,self).get_context_data(**kwargs)
+
         pk=int(self.kwargs['pk'])
-        # try:
         post_prev = Post.objects.filter(pk=str(pk-1))
-        # except BaseException:
-        #     post_prev = -1
-        # try:
         post_next = Post.objects.filter(pk=str(pk+1))
-        # except BaseException:
-        #     post_next = -1
 
         context["post"] = self.object
         if (not post_next) or post_next==1:
@@ -38,6 +33,7 @@ class PostTopicDetailView(DetailView, SingleObjectMixin):
         else:
             if post_next[0].is_published:
                 context["post_next"] = post_next[0]
+                logger.error("Is published? - {}", post_next[0].is_published)
             else:
                 context["post_next"] = -1
 
@@ -48,6 +44,41 @@ class PostTopicDetailView(DetailView, SingleObjectMixin):
                 context["post_prev"] = post_prev[0]
             else:
                 context["post_prev"] = -1
+        logger.error("pk = {}".format(pk))
+        logger.error("Post prev = {}".format(post_prev))
+        logger.error("Post next = {}".format(post_next))
+        return context
+
+class PrivatePostTopicDetailView(DetailView, SingleObjectMixin):
+    model = Post
+    template_name = "private_post_detail.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(PrivatePostTopicDetailView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Post.objects.all())
+        return super(PrivatePostTopicDetailView,self).get(request,*args,**kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(PrivatePostTopicDetailView,self).get_context_data(**kwargs)
+
+        pk=int(self.kwargs['pk'])
+        post_prev = Post.objects.filter(pk=str(pk-1))
+        post_next = Post.objects.filter(pk=str(pk+1))
+
+        context["post"] = self.object
+        if (not post_next) or post_next==1:
+            context["post_next"] = -1
+        else:
+            context["post_next"] = post_next[0]
+
+        if (not post_prev) or post_prev== -1:
+            context["post_prev"] = -1
+        else:
+            context["post_prev"] = post_prev[0]
+
         logger.error("pk = {}".format(pk))
         logger.error("Post prev = {}".format(post_prev))
         logger.error("Post next = {}".format(post_next))
@@ -92,3 +123,8 @@ class PrivatePostList(ListView,MultipleObjectMixin):
 
     def get_queryset(self):
         return Post.objects.all()
+
+class ContentList(ListView,MultipleObjectMixin):
+    model = Post
+    context_object_name = 'contents'
+    template_name = 'contents.html'

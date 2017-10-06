@@ -46,7 +46,7 @@
     <p class="blog-post-meta">{{post.createad_in}} by <a href="#">{{post.createad_by}}</a></p>
     {{ post.text|truncatechars_html:300|safe }} <br>
     <br>
-    <a class="btn btn-primary" href="{% url 'post_topics' post.pk %}" role="button">Читать подробнее...</a>
+    <a class="btn btn-primary" href="{% url 'private_post_detail' post.pk %}" role="button">Читать подробнее...</a>
 
 </div><!-- /.blog-post -->
 <hr>
