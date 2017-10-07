@@ -9,19 +9,10 @@ PMBLOG - {{post.title}}
     <div class="container">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                <a class="nav-link" href="{% url 'home' %}">Главная</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button"
-                   aria-haspopup="true"
-                   aria-expanded="false">Содержание</a>
-                <div class="dropdown-menu">
-
-
-                    <!--{% for post in all_articles %}-->
-                    <!--<a class="dropdown-item" href="{% url 'post_topics' post.pk %}">{{post.title|truncatechars:20}}</a>-->
-                    <!--{% endfor %}-->
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'content_list' %}">Содержание</a>
             </li>
         </ul>
     </div>
@@ -30,7 +21,7 @@ PMBLOG - {{post.title}}
 
 {% block breadcrumb %}
 <ol class="breadcrumb my-4">
-    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Posts</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Главная</a></li>
     <li class="breadcrumb-item active"><a href="{% url 'private_post_detail' post.pk %}">{{post.title}}</a></li>
 </ol>
 {% endblock %}
@@ -38,7 +29,7 @@ PMBLOG - {{post.title}}
 {% block post %}
 <div class="blog-post">
     <h2 class="blog-post-title">{{post.title}}</h2>
-    <p class="blog-post-meta">{{post.createad_in}} by <a href="#">{{post.createad_by}}</a></p>
+    <p class="blog-post-meta">{{post.createad_in}}. Автор: <a href="#">{{post.createad_by}}</a></p>
 
     {{post.text|safe}}
 
@@ -46,19 +37,35 @@ PMBLOG - {{post.title}}
 {% endblock %}
 
 {% block pagination %}
-  <div class="row justify-content-md-center">
+<div class="row justify-content-md-center">
+
     <div class="col">
         {% if post_prev != -1 %}
-            <p class="text-left"><a href="{% url 'private_post_detail' post_prev.pk %}">&larr; {{post_prev.title|truncatechars:25}}</a></p>
+        <p class="text-left">
+            <a href="{% url 'private_post_detail' post_prev.pk %}">&larr;
+                {{post_prev.title|truncatechars:25}}
+            </a>
+        </p>
         {% endif %}
     </div>
+
+
     <div class="col-5">
-      <p class="text-center"><a href="{% url 'home' %}">Содержание</a></p>
+        {% if post.is_published %}
+        <p class="text-center"><a href="{% url 'content_list' %}">Содержание</a></p>
+        {% endif %}
     </div>
+
+
     <div class="col">
         {% if post_next != -1 %}
-            <p class="text-right"><a href="{% url 'private_post_detail' post_next.pk %}">{{post_next.title|truncatechars:25}} &rarr;</a></p>
+        <p class="text-right">
+            <a href="{% url 'private_post_detail' post_next.pk %}">
+                {{post_next.title|truncatechars:25}} &rarr;
+            </a>
+        </p>
         {% endif %}
     </div>
-  </div>
+
+</div>
 {% endblock %}

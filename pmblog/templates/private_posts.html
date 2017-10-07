@@ -5,19 +5,10 @@
     <div class="container">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                <a class="nav-link active" href="{% url 'home' %}">Главная</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                   aria-haspopup="true"
-                   aria-expanded="false">Содержание</a>
-                <div class="dropdown-menu">
-
-
-                    {% for post in posts %}
-                    <a class="dropdown-item" href="{% url 'post_topics' post.pk %}">{{post.title|truncatechars:20}}</a>
-                    {% endfor %}
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'content_list' %}">Содержание</a>
             </li>
         </ul>
     </div>
@@ -26,7 +17,7 @@
 
 {% block breadcrumb %}
 <ol class="breadcrumb my-4">
-    <li class="breadcrumb-item active">Posts</li>
+    <li class="breadcrumb-item active">Главная</li>
 </ol>
 {% endblock %}
 
@@ -43,7 +34,7 @@
 
 <div class="blog-post">
     <h2 class="blog-post-title">{{post.title}}</h2>
-    <p class="blog-post-meta">{{post.createad_in}} by <a href="#">{{post.createad_by}}</a></p>
+    <p class="blog-post-meta">{{post.createad_in}}. Автор: <a href="#">{{post.createad_by}}</a></p>
     {{ post.text|truncatechars_html:300|safe }} <br>
     <br>
     <a class="btn btn-primary" href="{% url 'private_post_detail' post.pk %}" role="button">Читать подробнее...</a>

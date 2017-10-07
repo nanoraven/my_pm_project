@@ -124,7 +124,11 @@ class PrivatePostList(ListView,MultipleObjectMixin):
     def get_queryset(self):
         return Post.objects.all()
 
-class ContentList(ListView,MultipleObjectMixin):
-    model = Post
-    context_object_name = 'contents'
+class ContentListView(ListView,MultipleObjectMixin):
+    """
+     В оглавлении будут показываться только опубликованные статьи.
+     Делать отдельную страницу оглавления для неопубликованных смысла нет.
+    """
     template_name = 'contents.html'
+    context_object_name = 'contents'
+    queryset = Post.objects.filter(is_published=True)
