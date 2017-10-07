@@ -22,8 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'st0*e00aag=bg!8&$=^&w+uotts^f87-9$nzk%!5%nz25%eev4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['restapinanoraven.herokuapp.com', '127.0.0.1']
 
