@@ -1,20 +1,5 @@
 {% extends 'base.html' %}
 
-{% block tablecontent %}
-<div class="blog-masthead">
-    <div class="container">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url 'home' %}">Главная</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'content_list' %}">Содержание</a>
-            </li>
-        </ul>
-    </div>
-</div>
-{% endblock %}
-
 {% block breadcrumb %}
 <ol class="breadcrumb my-4">
     <li class="breadcrumb-item active">Главная</li>

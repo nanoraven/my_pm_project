@@ -4,21 +4,6 @@
 PMBLOG - {{post.title}}
 {% endblock %}
 
-{% block tablecontent %}
-<div class="blog-masthead">
-    <div class="container">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Главная</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'content_list' %}">Содержание</a>
-            </li>
-        </ul>
-    </div>
-</div>
-{% endblock %}
-
 {% block breadcrumb %}
 <ol class="breadcrumb my-4">
     <li class="breadcrumb-item active"><a href="{% url 'home' %}">Главная</a></li>
@@ -48,14 +33,6 @@ PMBLOG - {{post.title}}
         </p>
         {% endif %}
     </div>
-
-
-    <div class="col-5">
-        {% if post.is_published %}
-        <p class="text-center"><a href="{% url 'content_list' %}">Содержание</a></p>
-        {% endif %}
-    </div>
-
 
     <div class="col">
         {% if post_next != -1 %}
