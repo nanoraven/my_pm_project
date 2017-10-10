@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'pmblog',
     'ckeditor',
     'ckeditor_uploader',
+    'rest_framework'
 ]
 
 MIDDLEWARE_CLASSES = [
