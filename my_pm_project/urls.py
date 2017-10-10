@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from pmblog import views
 from django.conf.urls.static import static
 from my_pm_project import settings
 from pmblog.views import HomePageView, PrivatePostList, PostTopicDetailView, PrivatePostTopicDetailView, ContentListView
@@ -24,7 +23,6 @@ urlpatterns = [
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^posts/$', HomePageView.as_view(), name='home_2'),
     url(r'^contents/$', ContentListView.as_view(), name='content_list'),
-    # url(r'^posts/(?P<pk>\d+)/$', views.post_topics, name='post_topics'),
     url(r'^posts/(?P<pk>\d+)/$', PostTopicDetailView.as_view(), name='post_topics'),
     url(r'^posts_private/$', PrivatePostList.as_view(), name='private_posts'),
     url(r'^posts_private/(?P<pk>\d+)/$', PrivatePostTopicDetailView.as_view(), name='private_post_detail'),

@@ -10,3 +10,5 @@ olefile==0.44
 gunicorn==19.6.0
 whitenoise==3.3.1
 psycopg2==2.7.3.1
+djangorestframework==3.7.0
+Pygments==2.2.0

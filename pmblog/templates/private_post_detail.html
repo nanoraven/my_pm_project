@@ -14,7 +14,7 @@ PMBLOG - {{post.title}}
 {% block post %}
 <div class="blog-post">
     <h2 class="blog-post-title">{{post.title}}</h2>
-    <p class="blog-post-meta">{{post.createad_in}}. Автор: <a href="#">{{post.createad_by}}</a></p>
+    <p class="blog-post-meta">{{post.created_in}}. Автор: <a href="#">{{post.owner}}</a></p>
 
     {{post.text|safe}}
 

@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'my_pm_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'ec2-79-125-118-221.eu-west-1.compute.amazonaws.com',  # Set to empty string for localhost.
-        'NAME': 'd1jlab6518clm4',
-        'USER': 'wojvpnncuqumhs',
-        'PASSWORD': '980c127b30358986d664b39025d99090f31c8ce6f88c35961dad41e562074a71',
+        'HOST': 'ec2-54-228-235-198.eu-west-1.compute.amazonaws.com',  # Set to empty string for localhost.
+        'NAME': 'd2of3k2vhf2rt5',
+        'USER': 'odtgzcadcwgrby',
+        'PASSWORD': '3263c0e3ee3fe410f342061d7e06d1b414498ebbddad34446e06b9a50b3797a9',
         'PORT': '5432',  # Set to empty string for default.
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),

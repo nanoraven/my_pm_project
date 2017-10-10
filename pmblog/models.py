@@ -9,9 +9,9 @@ class Post(models.Model):
 
     title = models.CharField(max_length=100,null=False)
     text = RichTextUploadingField(blank=True, default='')
-    createad_in = models.DateTimeField(auto_now_add=True)
-    createad_by = models.ForeignKey(User,related_name='users')
+    created_in = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
 
 
 class Comment(models.Model):

@@ -11,7 +11,7 @@
 {% for post in posts %}
 <div class="blog-post">
     <h2 class="blog-post-title">{{post.title}}</h2>
-    <p class="blog-post-meta">{{post.createad_in}}. Автор: <a href="#">{{post.createad_by}}</a></p>
+    <p class="blog-post-meta">{{post.created_in}}. Автор: <a href="#">{{post.owner}}</a></p>
     {{ post.text|truncatechars_html:300|safe }} <br>
     <br>
     <a class="btn btn-primary" href="{% url 'post_topics' post.pk %}" role="button">Читать подробнее...</a>
